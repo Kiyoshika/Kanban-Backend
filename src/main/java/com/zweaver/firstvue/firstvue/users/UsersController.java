@@ -19,12 +19,25 @@ public class UsersController {
     private HashMap<String, User> usersMap = new HashMap<>();
 
     @RequestMapping(value = "users/createUser", method = RequestMethod.POST)
-    public void createNewUser(@RequestBody User newUser) {
+    public boolean createNewUser(@RequestBody User newUser) {
         if (usersMap.get(newUser.getUsername()) != null) {
             System.out.println("That user already exists.");
+            return false;
         } else {
             usersMap.put(newUser.getUsername(), newUser);
             ProjectListController.projectListMap.put(newUser.getUsername(), new ProjectList());
+            return true;
+        }
+    }
+
+    @RequestMapping(value = "users/login", method = RequestMethod.POST)
+    public boolean validateUser(@RequestBody User loginUser) {
+        if (usersMap.get(loginUser.getUsername()) == null) {
+            System.out.println("User does not exist.");
+            return false;
+        } else {
+            // password matches
+            return usersMap.get(loginUser.getUsername()).getPassword().equals(loginUser.getPassword()) ? true : false;
         }
     }
 }
