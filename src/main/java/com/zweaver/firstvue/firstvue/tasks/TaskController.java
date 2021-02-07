@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "https://vanillaprojectmanager-dev.netlify.app")
 public class TaskController {
     List<Task> taskList = new ArrayList<>();
 
