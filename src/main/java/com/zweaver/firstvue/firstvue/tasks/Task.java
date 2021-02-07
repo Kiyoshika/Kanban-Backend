@@ -10,6 +10,7 @@ public class Task {
 
     // "authentication" purposes
     private String username;
+    private String password;
 
     public Task() {}
     
@@ -40,7 +41,11 @@ public class Task {
     }
 
     public String getUsername() {
-        return this.username;
+        return this.username.toLowerCase();
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     // Setters
@@ -66,6 +71,10 @@ public class Task {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.toLowerCase();
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
