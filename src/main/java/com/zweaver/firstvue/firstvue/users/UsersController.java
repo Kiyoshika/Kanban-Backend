@@ -2,8 +2,6 @@ package com.zweaver.firstvue.firstvue.users;
 
 import java.util.HashMap;
 
-import com.zweaver.firstvue.firstvue.users.User;
-
 import com.zweaver.firstvue.firstvue.projectlist.ProjectList;
 import com.zweaver.firstvue.firstvue.projectlist.ProjectListController;
 
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = {"http://localhost:8080", "https://vanillaprojectmanager-dev.netlify.app"})
 public class UsersController {
-    private HashMap<String, User> usersMap = new HashMap<>();
+    private static HashMap<String, User> usersMap = new HashMap<>();
 
     @RequestMapping(value = "users/createUser", method = RequestMethod.POST)
     public boolean createNewUser(@RequestBody User newUser) {
@@ -25,7 +23,7 @@ public class UsersController {
             return false;
         } else {
             usersMap.put(newUser.getUsername(), newUser);
-            ProjectListController.projectListMap.put(newUser.getUsername(), new ProjectList());
+            ProjectListController.projectListMap.put(newUser.getUsername().toLowerCase(), new ProjectList());
             return true;
         }
     }
@@ -39,5 +37,13 @@ public class UsersController {
             // password matches
             return usersMap.get(loginUser.getUsername()).getPassword().equals(loginUser.getPassword()) ? true : false;
         }
+    }
+
+    public static String getPassword(String username) {
+        return usersMap.get(username).getPassword();
+    }
+
+    public static String getUsername(String username) {
+        return usersMap.get(username).getUsername();
     }
 }
