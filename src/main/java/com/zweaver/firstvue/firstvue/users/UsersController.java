@@ -7,12 +7,14 @@ import com.zweaver.firstvue.firstvue.users.User;
 import com.zweaver.firstvue.firstvue.projectlist.ProjectList;
 import com.zweaver.firstvue.firstvue.projectlist.ProjectListController;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class UsersController {
     private HashMap<String, User> usersMap = new HashMap<>();
 
